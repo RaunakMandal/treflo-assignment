@@ -1,26 +1,18 @@
-import { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Base from "./components/core/Base";
-import { fetchPizzas } from "./store/reducers/pizzaSlice";
-import { useDispatch, useSelector } from "react-redux";
-import PizzaCard from "./components/shared/PizzaCard";
+import Home from "./components/core/Home";
+import Cart from "./components/core/Cart";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const pizzas = useSelector((state) => state.pizza.pizzas);
-  const loading = useSelector((state) => state.pizza.loading);
-
-  useEffect(() => {
-    dispatch(fetchPizzas());
-  }, []);
-
   return (
-    <Base>
-      <div className="flex justify-center flex-wrap">
-        {pizzas.map((pizza) => (
-          <PizzaCard key={pizza.id} pizza={pizza} />
-        ))}
-      </div>
-    </Base>
+    <BrowserRouter>
+      <Base>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </Base>
+    </BrowserRouter>
   );
 };
 

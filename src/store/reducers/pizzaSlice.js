@@ -14,7 +14,7 @@ export const fetchPizzas = createAsyncThunk("pizzas/fetchPizzas", async () => {
 });
 
 export const pizzaSlice = createSlice({
-    name: "counter",
+    name: "pizza",
     initialState,
     reducers: {},
     extraReducers: builder => {
