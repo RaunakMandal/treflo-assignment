@@ -23,8 +23,10 @@ export const pizzaSlice = createSlice({
     initialState,
     reducers: {
         filterPizzas: (state, action) => {
-            const { type, value } = action.payload;
-            state.filters[type] = value;
+            if (action?.payload) {
+                const { type, value } = action.payload;
+                state.filters[type] = value;
+            }
 
             const { veg, nonVeg } = state.filters;
 
@@ -60,6 +62,8 @@ export const pizzaSlice = createSlice({
                 state.filteredPizzas = action.payload;
                 state.loading = false;
                 state.error = "";
+
+                pizzaSlice.caseReducers.filterPizzas(state);
             }),
             builder.addCase(fetchPizzas.rejected, (state) => {
                 state.pizzas = [];
