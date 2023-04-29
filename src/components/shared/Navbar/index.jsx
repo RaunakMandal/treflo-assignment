@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const cartItem = useSelector((state) => state.cart.cart);
-  console.log(cartItem);
   return (
     <div className="navbar bg-base-300 sticky top-0 z-10 px-4">
       <div className="flex-1">
