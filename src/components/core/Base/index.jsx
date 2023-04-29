@@ -3,9 +3,9 @@ import Navbar from "../../shared/Navbar";
 
 const Base = ({ children }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
-      <main className="flex flex-1 p-2">{children}</main>
+      <div className="flex flex-1 flex-col p-2">{children}</div>
       <Footer />
     </div>
   );

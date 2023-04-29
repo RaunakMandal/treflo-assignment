@@ -4,7 +4,7 @@ import { environment } from "../../environment";
 const initialState = {
     pizzas: [],
     loading: false,
-    error: null,
+    error: "",
 };
 
 export const fetchPizzas = createAsyncThunk("pizzas/fetchPizzas", async () => {
@@ -29,7 +29,7 @@ export const pizzaSlice = createSlice({
             builder.addCase(fetchPizzas.rejected, (state) => {
                 state.pizzas = [];
                 state.loading = false;
-                state.error = "Error fetching pizzas";
+                state.error = "Error fetching pizzas from API";
             });
     },
 });

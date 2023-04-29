@@ -21,12 +21,12 @@ const PizzaCard = ({
   return (
     <div className="card w-96 bg-base-100 shadow-xl m-4">
       <figure className="px-10 pt-10">
-        <img src={img_url} alt={name} className="rounded-xl" />
+        <img src={img_url} alt={name} className="rounded-xl h-52" />
       </figure>
       <div className="card-body items-start">
         <span className="flex items-center justify-between w-full">
           <h2 className="card-title">{name}</h2>
-          <span className={`badge badge-${isVeg ? "primary" : "danger"}`}>
+          <span className={`badge badge-${isVeg ? `accent` : `secondary`}`}>
             {isVeg ? "Veg" : "Non-Veg"}
           </span>
         </span>
@@ -35,7 +35,7 @@ const PizzaCard = ({
           <span className="badge badge-outline">{rating} ⭐️</span>
         </span>
         <p>{description}</p>
-        <button className="btn" onClick={handleAddToCart}>
+        <button className="btn btn-primary self-end" onClick={handleAddToCart}>
           Add to Cart
         </button>
       </div>

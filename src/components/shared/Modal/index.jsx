@@ -88,13 +88,11 @@ const Modal = ({
   return (
     <div className={`modal modal-bottom sm:modal-middle modal-open`}>
       <div className="modal-box">
-        <div className="flex justify-between items-start gap-2">
+        <div className="flex justify-between items-start gap-2 my-4 sm:flex-col">
           <img src={pizzaInCart.img_url} alt="pizza" className="w-[200px]" />
           <div className="flex flex-col items-start gap-2">
             <h2 className="text-2xl">{pizzaInCart.name}</h2>
             <p className="text-sm">{pizzaInCart.description}</p>
-
-            <p>Customize your Pizza</p>
             <div className="flex flex-col gap-2">
               <p className="text-sm capitalize">Choose Size</p>
               <div className="flex flex-col">
@@ -195,8 +193,11 @@ const Modal = ({
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <button className="btn" onClick={handleModalClose}>
-            Close
+          <button
+            className="absolute top-0 right-0 m-4 hover:bg-slate-800 hover:text-white rounded p-2"
+            onClick={handleModalClose}
+          >
+            X
           </button>
           <button className="btn" onClick={handleAddToCart}>
             Add to Cart

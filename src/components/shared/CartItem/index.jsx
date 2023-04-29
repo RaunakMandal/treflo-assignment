@@ -35,15 +35,15 @@ const CartItem = ({
   };
 
   return (
-    <div className="card w-100 bg-primary">
-      <div className="card-body items-start flex-row">
-        <figure className="w-20 flex-1">
+    <div className="card w-100 bg-base-300">
+      <div className="card-body items-start flex-row flex-wrap">
+        <figure className="w-20">
           <img src={img_url} alt={name} className="rounded-xl" />
         </figure>
-        <p className="text-l font-bold flex-1">{name}</p>
-        <p className="flex-1">{size.join(", ")}</p>
-        <p className="flex-1">{toppings.join(", ")}</p>
-        <p className="text-l font-bold flex-1">INR {quantity * price}</p>
+        <p className="text-l font-bold">{name}</p>
+        <p className="text-l font-bold">Size: {size.join(", ")}</p>
+        <p className="text-l font-bold">Toppings: {toppings.join(", ")}</p>
+        <p className="text-l font-bold">INR {quantity * price}</p>
         {quantity > 1 && (
           <button className="btn" onClick={(e) => handleQuantityChange(e, -1)}>
             -
