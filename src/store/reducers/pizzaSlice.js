@@ -3,6 +3,11 @@ import { environment } from "../../environment";
 
 const initialState = {
     pizzas: [],
+    filteredPizzas: [],
+    filters: {
+        veg: true,
+        nonVeg: true,
+    },
     loading: false,
     error: "",
 };
@@ -16,7 +21,35 @@ export const fetchPizzas = createAsyncThunk("pizzas/fetchPizzas", async () => {
 export const pizzaSlice = createSlice({
     name: "pizza",
     initialState,
-    reducers: {},
+    reducers: {
+        filterPizzas: (state, action) => {
+            const { type, value } = action.payload;
+            state.filters[type] = value;
+
+            const { veg, nonVeg } = state.filters;
+
+            if (veg && nonVeg) {
+                state.filteredPizzas = state.pizzas;
+            }
+
+            if (veg && !nonVeg) {
+                state.filteredPizzas = state.pizzas.filter(
+                    pizza => pizza.isVeg
+                );
+
+            }
+
+            if (!veg && nonVeg) {
+                state.filteredPizzas = state.pizzas.filter(
+                    pizza => !pizza.isVeg
+                );
+            }
+
+            if (!veg && !nonVeg) {
+                state.filteredPizzas = [];
+            }
+        }
+    },
     extraReducers: builder => {
         builder.addCase(fetchPizzas.pending, (state) => {
             state.pizzas = [];
@@ -24,7 +57,9 @@ export const pizzaSlice = createSlice({
         }),
             builder.addCase(fetchPizzas.fulfilled, (state, action) => {
                 state.pizzas = action.payload;
+                state.filteredPizzas = action.payload;
                 state.loading = false;
+                state.error = "";
             }),
             builder.addCase(fetchPizzas.rejected, (state) => {
                 state.pizzas = [];
@@ -33,5 +68,7 @@ export const pizzaSlice = createSlice({
             });
     },
 });
+
+export const { filterPizzas } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;
