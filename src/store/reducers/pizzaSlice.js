@@ -8,6 +8,7 @@ const initialState = {
         veg: true,
         nonVeg: true,
     },
+    sortDir: "price-asc",
     loading: false,
     error: "",
 };
@@ -50,6 +51,30 @@ export const pizzaSlice = createSlice({
             if (!veg && !nonVeg) {
                 state.filteredPizzas = [];
             }
+        },
+        sortPizzas: (state, action) => {
+            if (action?.payload) {
+                const { value } = action.payload;
+                state.sortDir = value;
+            }
+
+            const { sortDir } = state;
+
+            if (sortDir === "price-asc") {
+                state.filteredPizzas.sort((a, b) => a.price - b.price);
+            }
+
+            if (sortDir === "price-desc") {
+                state.filteredPizzas.sort((a, b) => b.price - a.price);
+            }
+
+            if (sortDir === "rating-asc") {
+                state.filteredPizzas.sort((a, b) => a.rating - b.rating);
+            }
+
+            if (sortDir === "rating-desc") {
+                state.filteredPizzas.sort((a, b) => b.rating - a.rating);
+            }
         }
     },
     extraReducers: builder => {
@@ -64,6 +89,7 @@ export const pizzaSlice = createSlice({
                 state.error = "";
 
                 pizzaSlice.caseReducers.filterPizzas(state);
+                pizzaSlice.caseReducers.sortPizzas(state);
             }),
             builder.addCase(fetchPizzas.rejected, (state) => {
                 state.pizzas = [];
@@ -73,6 +99,6 @@ export const pizzaSlice = createSlice({
     },
 });
 
-export const { filterPizzas } = pizzaSlice.actions;
+export const { filterPizzas, sortPizzas } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;
